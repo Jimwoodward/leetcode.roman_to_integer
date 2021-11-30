@@ -4,6 +4,18 @@ import (
 	"fmt"
 )
 
+// Pseudo code:
+// 1. Iterate through each byte of the input string.
+// 2. If there is a byte past the ith position (if i is not the last byte in the string)...
+// 3. If that preceding byte is greater than the ith byte (criteria #1 for a valid roman numeral combo)...
+// 4. If the combination of the two bytes is a valid roman numeral combination i.e. "CD", "IX", etc., then add the
+// corresponding value to the returned value and iterate i by 1 (since we have just evaluated the preceding byte we need
+// to skip over it)
+// 4. Else, then just add the corresponding value of the ith byte to the returned value
+// 5. Else, then just add the corresponding value of the ith byte to the returned value
+// 6. Else, then just add the corresponding value of the ith byte to the returned value and return
+// 7. Return
+
 func romanToInt(s string) int {
 	var romanToInt = map[string]int{
 		"I": 1,
@@ -24,35 +36,19 @@ func romanToInt(s string) int {
 	retVal := 0
 	lengthOfInput := len(s)
 
-	// Iterate through each byte of the input string
 	for i := 0; i < lengthOfInput; i++ {
-		fmt.Println("We should enter here 1")
-		// If there is a byte past the i-th position...
 		if i < lengthOfInput-1 {
-			fmt.Println("We should enter here 2 times")
-			// If the next byte in our string is greater than the indexed byte AND the combination of the two is in
-			// our map, then look up the combined string representation of the bytes to see if they're one of the
-			// special cases in roman numerals
 			if romanToInt[string(s[i])] < romanToInt[string(s[i+1])] {
-				fmt.Println("We should not enter here 1")
-				// If that combo of bytes (as a string) is in our map, add it to retVal
-				if val, ok := romanToInt[string(s[i])+string(s[i])]; ok {
+				if val, ok := romanToInt[string(s[i])+string(s[i+1])]; ok {
 					retVal += val
-					// If the combo of bytes (as a string) is not in our map, then just add the current indexed byte...
+					i += 1
 				} else {
 					retVal += romanToInt[string(s[i])]
 				}
 			} else {
-				fmt.Println("We should enter here 2")
 				retVal += romanToInt[string(s[i])]
-				fmt.Println(retVal)
 			}
-			//retVal += romanToInt[string(s[i])]
-			fmt.Printf("retVal = %v\n", retVal)
-
-			// If i is that last byte in our input string, don't bother to look for a preceding rune
 		} else {
-			fmt.Println("We should enter here 3")
 			retVal += romanToInt[string(s[i])]
 			return retVal
 		}
@@ -62,4 +58,6 @@ func romanToInt(s string) int {
 
 func main() {
 	fmt.Println(romanToInt("III"))
+	fmt.Println(romanToInt("IV"))
+	fmt.Println(romanToInt("CIX"))
 }
