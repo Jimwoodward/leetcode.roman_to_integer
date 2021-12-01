@@ -8,8 +8,8 @@ import (
 // 1. Iterate through each byte of the input string.
 // 2. If there is a byte past the i position (if i is not the last byte in the string)...
 // 4. If the combination of the i and i+1 bytes is a valid roman numeral combination i.e. "CD", "IX", etc., then add the
-// corresponding value to the returned value and iterate i by 1 (since we have just evaluated the preceding byte we need
-// to skip over it)
+// corresponding value to the returned value and iterate i by 1 (since we have just evaluated the byte at i _and the
+// preceding_ byte we need to iterate twice)
 // 4. Else, then just add the corresponding value of the i byte to the returned value
 // 6. Else, then just add the corresponding value of the i byte to the returned value and return
 // 7. Return
