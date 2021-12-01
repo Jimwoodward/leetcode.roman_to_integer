@@ -49,9 +49,3 @@ func romanToInt(s string) int {
 	}
 	return retVal
 }
-
-func main() {
-	fmt.Println(romanToInt("III"))
-	fmt.Println(romanToInt("IV"))
-	fmt.Println(romanToInt("CIX"))
-}
